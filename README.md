@@ -23,12 +23,12 @@ Sobre o dimensionamento, as duas primeiras linhas do dimensionamento são explic
 
 |   | FÓRMULA | COMENTÁRIO |
 |:---||:---|:---|
-| N13 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	Verifica a velocidade máxima do esgoto de início de plano
-| N14 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	Verifica a velocidade máxima do esgoto de final de plano
-| O13 |	=SE(C13=0;"";1000*W13*H13*10)	Verifica a tensão trativa de início de plano, a crítica nessa avaliação
-| P13 |	=SE(C13=0;"";SE(W14=0;"";6*RAIZ(9,81*W14)))	Velocidade crítica no trecho, para mudança de regime de escoamento
-| Q13 |	0,01	Coeficiente de Manning da tubulação, nesse caso de PVC rígido
-| Q14 |	0,01	Coeficiente de Manning da tubulação, nesse caso de PVC rígido
+| N13 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	| Verifica a velocidade máxima do esgoto de início de plano |
+| N14 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	| Verifica a velocidade máxima do esgoto de final de plano |
+| O13 |	=SE(C13=0;"";1000*W13*H13*10)	| Verifica a tensão trativa de início de plano, a crítica nessa avaliação |
+| P13 |	=SE(C13=0;"";SE(W14=0;"";6*RAIZ(9,81*W14)))	| Velocidade crítica no trecho, para mudança de regime de escoamento |
+| Q13 |	0,010	| Coeficiente de Manning da tubulação, nesse caso de PVC rígido |
+| Q14 |	0,010 |	Coeficiente de Manning da tubulação, nesse caso de PVC rígido |
 | R13 |   |	Observações |
 | S13 |	=SE(C13=0;0;SE(B13=0;0;calculaB(G13/1000;H13;F13;Q13)))	| Calcula  o ângulo a de início de plano da tubulação, com base na macro adaptada do Tsutiya (1999) | 
 | S14 |	=SE(C14=0;0;SE(B13=0;0;calculaB(G13/1000;H13;F14;Q14)))	| Calcula  o ângulo a de final de plano da tubulação, com base na macro adaptada do Tsutiya (1999) |

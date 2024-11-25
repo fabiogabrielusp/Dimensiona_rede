@@ -1,4 +1,4 @@
-# Dimensiona_rede
+# Dimensionamento rede
 Série de modelos para dimensionamento de rede de esgoto pelo método convencional para introduzir no Qgis e tratar no Excel
 
 Não esqueça de mudar o sistema de coordenadas do projeto e das camadas e de nomear o modelo digital de elevação como 'MDE'.

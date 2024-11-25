@@ -23,7 +23,7 @@ Na planilha de dimensionamento, as vazões devem ser definidas na aba 'VAZÕES' 
 
 Sobre o dimensionamento, as duas primeiras linhas do dimensionamento são explicadas na tabela imediatamente abaixo, as demais células abaixo seguem os mesmo cálculos
 
-|   | FÓRMULA | COMENTÁRIO |
+| CÉLULA | FÓRMULA | COMENTÁRIO |
 |:---|:---|:---|
 | N13 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	| Verifica a velocidade máxima do esgoto de início de plano |
 | N14 |	=SE(C13=0;"";SE(T13=0;"";T13/U13))	| Verifica a velocidade máxima do esgoto de final de plano |

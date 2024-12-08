@@ -1,0 +1,122 @@
+COMP. - $length
+
+INCLIN. - (raster_value('MDE' , 1 , end_point($geometry))-raster_value('MDE' , 1 , start_point($geometry)))/ "COMP."
+
+Xini - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)), x(start_point($geometry)),x(end_point($geometry))),if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)), x(end_point($geometry)),x(start_point($geometry))))
+
+Xfinal - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)), x(start_point($geometry)),x(end_point($geometry))), if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)), x(end_point($geometry)),x(start_point($geometry))))
+
+Yini - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)), y(start_point($geometry)),y(end_point($geometry))), if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)), y(end_point($geometry)),y(start_point($geometry))))
+
+Yfinal - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)), y(start_point($geometry)),y(end_point($geometry))), if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)), y(end_point($geometry)),y(start_point($geometry))))
+
+COTAini - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,start_point($geometry)),raster_value('MDE',1,end_point($geometry))), if(raster_value('MDE',1,start_point($geometry))>=raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,start_point($geometry))))
+
+COTAfinal - if("DIR" IS NULL, if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,start_point($geometry)),raster_value('MDE',1,end_point($geometry))), if(raster_value('MDE',1,start_point($geometry))<raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,end_point($geometry)),raster_value('MDE',1,start_point($geometry))))
+
+TIPO[0] - if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),0
+)),'COTAfinal'))=NULL,NULL,if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),0
+)),'COTAfinal'))>=to_real(
+attribute($currentfeature,'COTAfinal')),'PONTA SECA',NULL))
+
+TIPO[1] - if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),1
+)),'COTAfinal')) = NULL,NULL,if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),1
+)),'COTAfinal'))>=to_real(
+attribute($currentfeature,'COTAfinal')),'PONTA SECA',NULL))
+
+TIPO[2] - if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),2
+)),'COTAfinal')) = NULL,NULL,if(to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xini')
+	AND "Yini" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),2
+)),'COTAfinal'))>=to_real(
+attribute($currentfeature,'COTAfinal')),'PONTA SECA',NULL))
+
+TIPO [3] - CASE
+WHEN (to_real(attribute(get_feature(@layer,'ID',array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xfinal" = attribute(@parent, 'Xini')
+	AND "Yfinal" = attribute(@parent, 'Yini')
+	AND "ID" != attribute(@parent, 'ID')),0
+)),'COTAfinal'))) IS NULL THEN 'PONTA SECA'
+ELSE NULL
+END
+
+TIPO - if(attribute('TIPO[0]') = 'PONTA SECA' or attribute('TIPO[1]') = 'PONTA SECA' or attribute('TIPO[2]') = 'PONTA SECA' or attribute('TIPO[3]') = 'PONTA SECA','TERMINAL DE LIMPEZA', 'TERMINAL DE INSPEÇÃO E LIMPEZA')
+
+
+FINAL-INICÍO - array_to_string(
+    aggregate(
+        layer:=@layer,
+        aggregate:='array_agg',
+        expression:="ID",
+        filter:="Xfinal" = attribute(@parent, 'Xini')
+		AND "Yfinal" = attribute(@parent, 'Yini')
+		AND "ID" != attribute(@parent, 'ID')
+    ),
+    ', '
+)
+
+FINAL-FINA - array_to_string(
+    aggregate(
+        layer:=@layer,
+        aggregate:='array_agg',
+        expression:="ID",
+        filter:="Xfinal" = attribute(@parent, 'Xfinal')
+		AND "Yfinal" = attribute(@parent, 'Yfinal')
+		AND "ID" != attribute(@parent, 'ID')
+    ),
+    ', '
+)
+
+FINAL - if(to_real(array_get(
+aggregate(
+	layer:=@layer,
+	aggregate:='array_agg',
+	expression:="ID",
+	filter:="Xini" = attribute(@parent, 'Xfinal')
+	AND "Yini" = attribute(@parent, 'Yfinal')
+	AND "ID" != attribute(@parent, 'ID')),0
+))IS NULL,'FINAL DE TRECHO',NULL)

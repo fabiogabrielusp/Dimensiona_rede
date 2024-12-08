@@ -17,7 +17,7 @@ Os códigos foram inseridos nas propriedades da camada e, ao inserir um trecho, 
 
 ![image](https://github.com/user-attachments/assets/7c78e7bc-cda6-4cbf-8caf-ce2b19fdf4b4)
 
-A tabela de atributos do 'TRECHO RETO' deve ser exportada em formato xls e copiada para a aba da planilha do Excel de dimensionamento 'Planilha esgoto genérica' no mesmo formato que o gerado pela exportação.
+A tabela de atributos do 'TRECHO RETO' deve ser exportada em formato xls e copiada para a aba da planilha do Excel de dimensionamento 'Planilha esgoto' no mesmo formato que o gerado pela exportação.
 
 Na planilha de dimensionamento, as vazões devem ser definidas na aba 'VAZÕES' conforme as populações das últimas apurações e a população de saturação conforme estudo da cidade ou bairro referente ao perfil de ocupação, do uso e ocupação do solo e das disposições do plano diretor estratégico da cidade.
 

@@ -21,7 +21,7 @@ A tabela de atributos do 'TRECHO RETO' deve ser exportada em formato xls e copia
 
 Na planilha de dimensionamento, as vazões devem ser definidas na aba 'VAZÕES' conforme as populações das últimas apurações e a população de saturação conforme estudo da cidade ou bairro referente ao perfil de ocupação, do uso e ocupação do solo e das disposições do plano diretor estratégico da cidade.
 
-Sobre o dimensionamento, as duas primeiras linhas do dimensionamento são explicadas na tabela imediatamente abaixo, as demais células abaixo seguem os mesmo cálculos
+Sobre o dimensionamento, as duas primeiras linhas do dimensionamento são explicadas na tabela imediatamente abaixo, as demais células do dimensionamento seguem os mesmo cálculos
 
 | CÉLULA | FÓRMULA | COMENTÁRIO |
 |:---|:---|:---|
